@@ -5,18 +5,18 @@ packages:
     runtime_package : False
   - feedstock : polars
   - feedstock : https://github.com/conda-forge/rust-feedstock.git
-    git_tag : c94f3a87eef0c274fa3c8f6f8a6ce364caa30437
+    git_tag : 9e3ebf08dd8bd0e31230f4cb0542a87bbc274f0e    # v1.90.*
     patches:
-      - feedstock-patches/rust/0001-Fixed-build.patch #[not s390x]
-      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
+      - feedstock-patches/rust/0001-Open-CE-changes.patch #[not s390x]
+#      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
   - feedstock : https://github.com/conda-forge/rust-activation-feedstock
-    git_tag : 15daecc326884626192eecfe6279580edaad0855
+    git_tag : 4b6fee0b1fc5a98302f1a6c9e430f0993783ac55
     patches :
-      - feedstock-patches/rust-activation/0001-Fixed-build.patch
+#      - feedstock-patches/rust-activation/0001-Fixed-build.patch
   - feedstock : https://github.com/conda-forge/maturin-feedstock
-    git_tag : 8f30ac9261677703bb3dc2d6bb31528946d42e93
+    git_tag : e9a48388edf8cb0cb083120db53ef9e967d85b03
     patches :
-        - feedstock-patches/maturin/0001-opence-changes.patch
+      - feedstock-patches/maturin/0001-Fixed-build-failure-and-Open-CE-changes.patch
   - feedstock : https://github.com/conda-forge/setuptools-feedstock  #v76.1.0
     git_tag : 66dcc5d189336642efd1840d848ed91c570a8db2
     patches :

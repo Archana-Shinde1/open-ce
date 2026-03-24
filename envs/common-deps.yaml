@@ -26,20 +26,30 @@ packages:
   - feedstock : https://github.com/conda-forge/typing_extensions-feedstock.git #[ppc64le]
     git_tag : f853e30236c9c866bdc7cc8e4d1fbe766b182f37                         #[ppc64le]
   - feedstock : https://github.com/AnacondaRecipes/cryptography-feedstock          #[ppc64le]
-    git_tag : 7f71ebd7a05825a90011e57e561afc48ff4c61f7                             #[ppc64le]
+    git_tag : fc4107f1d56d9bb5689434fe43ab1ed5bd37eed4          #[ppc64le]
     patches:                                                                       #[ppc64le]
       - feedstock-patches/cryptography/0001-Opence-changes.patch                   #[ppc64le]
-  - feedstock : https://github.com/AnacondaRecipes/cryptography-vectors-feedstock  #[ppc64le]
-    git_tag : d27672f942121ae385f3b0c99b2532a1d6930853                             #[ppc64le]
   - feedstock : https://github.com/conda-forge/rust-feedstock.git
-    git_tag : c94f3a87eef0c274fa3c8f6f8a6ce364caa30437
+    git_tag : 9e3ebf08dd8bd0e31230f4cb0542a87bbc274f0e    # v1.90.*
     patches:
-      - feedstock-patches/rust/0001-Fixed-build.patch #[not s390x]
-      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
+      - feedstock-patches/rust/0001-Open-CE-changes.patch #[not s390x]
+#      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
   - feedstock : https://github.com/conda-forge/rust-activation-feedstock
-    git_tag : 15daecc326884626192eecfe6279580edaad0855
+    git_tag : 4b6fee0b1fc5a98302f1a6c9e430f0993783ac55
     patches :
-      - feedstock-patches/rust-activation/0001-Fixed-build.patch
+      - feedstock-patches/rust-activation/0001-Open-CE-changes.patch
+  - feedstock : https://github.com/conda-forge/uv-build-feedstock               #[ppc64le]
+    git_tag : 900527d005dfe360b090c9859db84e82abc7c763                          #[ppc64le]
+    patches :                                                                   #[ppc64le]
+      - feedstock-patches/uvbuild/0001-Open-CE-changes.patch                    #[ppc64le]
+  - feedstock : https://github.com/conda-forge/maturin-feedstock                #[ppc64le]
+    git_tag : e9a48388edf8cb0cb083120db53ef9e967d85b03                          #[ppc64le]
+    patches :                                                                   #[ppc64le]
+      - feedstock-patches/maturin/0001-Fixed-build-failure-and-Open-CE-changes.patch  #[ppc64le]
+  - feedstock : https://github.com/conda-forge/cffi-feedstock                   #[ppc64le]
+    git_tag : 57418167e36dfe384a62efb0fe9ee8fba003a4f8                          #[ppc64le]
+    patches :                                                                   #[ppc64le]
+      - feedstock-patches/cffi/0001-Fixed-build-failure-and-Open-CE-changes.patch #[ppc64le]
   - feedstock : https://github.com/conda-forge/pyopenssl-feedstock               #[ppc64le]
     git_tag : 8a545b01a8a9641b901bba19e5e130e93ca08cca                           #[ppc64le]
   - feedstock : https://github.com/conda-forge/zlib-feedstock

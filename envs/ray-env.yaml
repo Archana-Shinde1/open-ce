@@ -12,14 +12,14 @@ packages:
   - feedstock : https://github.com/AnacondaRecipes/annotated-types-feedstock    #[ppc64le]
     git_tag : 44491b67fc663a52d874f4d1e7f8b77cca020dc9                          #[ppc64le]
   - feedstock : https://github.com/conda-forge/rust-feedstock.git
-    git_tag : c94f3a87eef0c274fa3c8f6f8a6ce364caa30437
-    patches :
-      - feedstock-patches/rust/0001-Fixed-build.patch #[not s390x]
-      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
+    git_tag : 9e3ebf08dd8bd0e31230f4cb0542a87bbc274f0e    # v1.90.*
+    patches:
+      - feedstock-patches/rust/0001-Open-CE-changes.patch #[not s390x]
+#      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
   - feedstock : https://github.com/conda-forge/rust-activation-feedstock
-    git_tag : 15daecc326884626192eecfe6279580edaad0855
+    git_tag : 4b6fee0b1fc5a98302f1a6c9e430f0993783ac55
     patches :
-      - feedstock-patches/rust-activation/0001-Fixed-build.patch
+      - feedstock-patches/rust-activation/0001-Open-CE-changes.patch
   - feedstock : https://github.com/conda-forge/uvicorn-feedstock
     git_tag : f5a97e4e7ecf157909e6b6344eb4d3f694680433  #v0.22.0
   - feedstock : https://github.com/AnacondaRecipes/cfitsio-feedstock

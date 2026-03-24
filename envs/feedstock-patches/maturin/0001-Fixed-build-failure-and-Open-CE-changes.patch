@@ -1,0 +1,142 @@
+From 82ead5869ab462e58e8a1b7d51f63b344124308f Mon Sep 17 00:00:00 2001
+From: Archana-Shinde1 <archana.shinde1@ibm.com>
+Date: Thu, 19 Mar 2026 13:12:57 +0000
+Subject: [PATCH] Fixed build failure and Open-CE changes
+
+---
+ recipe/meta.yaml                         |  82 +++++++++++++++++++++++
+ recipe/patches/fix-setuptools-rust.patch | Bin 0 -> 505 bytes
+ recipe/patches/pyproject.patch           | Bin 0 -> 1146 bytes
+ 3 files changed, 82 insertions(+)
+ create mode 100644 recipe/meta.yaml
+ create mode 100644 recipe/patches/fix-setuptools-rust.patch
+ create mode 100644 recipe/patches/pyproject.patch
+
+diff --git a/recipe/meta.yaml b/recipe/meta.yaml
+new file mode 100644
+index 0000000..5eef8a1
+--- /dev/null
++++ b/recipe/meta.yaml
+@@ -0,0 +1,82 @@
++# yaml-language-server: $schema=https://raw.githubusercontent.com/prefix-dev/recipe-format/main/schema.json
++
++{% set name = "maturin" %}
++{% set version = "1.9.4" %}
++
++package:
++  name: {{ name }}
++  version: {{ version }}
++
++source:
++  url: https://pypi.org/packages/source/m/maturin/maturin-{{ version }}.tar.gz
++  sha256: "235163a0c99bc6f380fb8786c04fd14dcf6cd622ff295ea3de525015e6ac40cf"
++  patches:
++    - patches/fix-setuptools-rust.patch
++    - patches/pyproject.patch
++
++build:
++  number: 2
++  # we only build 1 package for each target platform
++  # so only trigger the build on the lowest python version
++#  skip: "not match(python, python_min + '.*')"
++  # the `is_python_min` currently has a rendering bug, so do not use is_python_min
++  # until conda-smithy/issues/2320 is fixed
++  python:
++    version_independent: true
++
++  script_env:
++      MATURIN_SETUP_ARGS: "--no-default-features --features=full,native-tls,password-storage"
++      CARGO_NET_GIT_FETCH_WITH_CLI: "true"
++      OPENSSL_NO_VENDOR: "1"
++  script:
++    - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
++    - "{{ PYTHON }} -m pip install -v --use-pep517 --no-build-isolation ."
++requirements:
++  build:
++    - cargo-bundle-licenses
++    - {{ compiler('c') }}
++#    - "${{ stdlib('c') }}
++    - {{ compiler('rust') }}
++    - python    # [build_platform != target_platform]
++    - cross-python_${{ target_platform }}    # [build_platform != target_platform]
++  host:
++    - python
++    - pip
++    - setuptools
++    - setuptools-rust >=1.4.0
++    - wheel
++    - tomli >=1.1.0
++    - openssl   # [unix]
++    - pkg-config  # [unix]
++  run:
++    # do we really need python here?
++    - python
++    - tomli >=1.1.0
++
++  ignore_run_exports:
++    from_package:
++      # avoid run_requirements on cpython abi
++      - cross-python_${{ target_platform }}
++
++tests:
++  - imports:
++        - maturin
++  - script:
++      - maturin --help
++
++about:
++  homepage: https://github.com/PyO3/maturin
++  repository: https://github.com/PyO3/maturin
++  license: MIT
++  license_family: MIT
++  license_file:
++    - license-mit
++    - THIRDPARTY.yml
++  summary: >-
++    Build and publish crates with pyo3, rust-cpython and cffi bindings as well as rust binaries as python packages
++
++extra:
++  recipe-maintainers:
++    - messense
++    - apcamargo
++    - synapticarbors
+diff --git a/recipe/patches/fix-setuptools-rust.patch b/recipe/patches/fix-setuptools-rust.patch
+new file mode 100644
+index 0000000000000000000000000000000000000000..9a0ff76e6718773573928a2655f2b5cebb64e262
+GIT binary patch
+literal 505
+zcmcJLOK*fA6ouF2SKP3gi9i9XjwU9ii!Qt9b}}(maZ2hdpwn0S-;2&<QoHX>xLnT3
+z`5;ufu7R5A5!zy$jP9slF}q{E(Z^e>#%W-~$J)Efh*G+?*0CGOWk|VC#SVCs_#z1+
+z<_jVHD2zFH+!gXXZ_T*k|Hfq^111A5W3dzB63;TAAtxbtOV2U{%d0mC<~k{3b>F3z
+zot)LOt;(jbHvPiSm9}I4_M%jS6Zm!dCWy`iGdW+qkE)wNHr+ot;a+zeeEBd;pfE?9
+zmag~tJQ6t1ZPDpkx%lGmF{MpkzN!iz2&nFqy0twJ<o(+<Gku1`ryg=!)GB=_8mpYR
+FML(yeoP7WQ
+
+literal 0
+HcmV?d00001
+
+diff --git a/recipe/patches/pyproject.patch b/recipe/patches/pyproject.patch
+new file mode 100644
+index 0000000000000000000000000000000000000000..1ba3bfcd5f72a59346e5393780eafa81b2c69d82
+GIT binary patch
+literal 1146
+zcmZ`&O;6k~5Ir})Vw4Mq#3o<6p<5O$Emeh7R7AO<Rb>+Iu8U)*wgYTY|9i(Kz(Q4D
+zoIKCWo9B5Zgh0RTjsD3SN1g5@)kdt}6<IMQSxNE($m&^@&B~J2d09`YgGmNShAT>v
+z<W25wTAt5}YE~6=TGi9Ks)}k%TP%R&S(;BE@mmRtMFbICjZG{gP^{xHhqz;IFha#q
+za?6bsT6r+1?`aiB&~n=t(Yq1;I0)GSQ!VtvwG?&(jbV;kxD#%JZR#?GX0;L_WKhC?
+zUJKO<wYI=8j7#ZvGg#*jm=TzaK)-bxWbRpW!`9p)GaC>w7Mr<xc<%K^E9<b=6nMvk
+z^qr2-!vA0Ed%W0n41Z9c;j9e`A7CY9kb3d?_~h&}?OH6*Xyv$a#BKX<=J>ta@0hu1
+z^_{{BzQC_R7;eef9FiT)aX@iIq-eOZA@A(;624u)F}A+pq@dZ$G4Z@XK|}yoJf@LO
+zxHx@-u~5Ln%P4uN{{X%*FZ5p`Y%+<Uk<41L5;#16S&?Ug_)_<xf!Pec>y^7>hQkTJ
+z<x=+@iuU;9C@-~^7D*qI&W&Ch)^#{8_{!9Jz*+d%3mg{)c~2E}T0>Gy(rIv1;QC+M
+z`QuQrz-iY@?wMI|5+Yv=WAc3Ksc}{<@40HZYP=m#MC{*)IGX1)rx|=0?eSwY=;2;T
+z^L#H}Mx@=MjZvu28BY=3F*?=3yiAf^4h;D%)*%abiBgZ|8O<}ArH8neIK^d<TV*IT
+zDeE-Pg5FOXjKyp8x$(xi-p=;XHQ@zOWA~e<bGmVzL>uFib9l$payRt;%f5_v#~(?!
+d$k+aOjXnD#!RDXdNl@_gfFE@Swh>xJe*qfzTc`j4
+
+literal 0
+HcmV?d00001
+
+-- 
+2.40.1
+

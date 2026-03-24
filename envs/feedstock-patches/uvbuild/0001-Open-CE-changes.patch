@@ -1,0 +1,24 @@
+From 049f9ab7c6c93b47c48005e42fcab8bb33aa6015 Mon Sep 17 00:00:00 2001
+From: Archana-Shinde1 <archana.shinde1@ibm.com>
+Date: Thu, 19 Mar 2026 13:04:36 +0000
+Subject: [PATCH] Open-CE changes
+
+---
+ recipe/meta.yaml | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/recipe/meta.yaml b/recipe/meta.yaml
+index b3cf5a7..47d8483 100644
+--- a/recipe/meta.yaml
++++ b/recipe/meta.yaml
+@@ -15,7 +15,6 @@ build:
+ requirements:
+   build:
+     - {{ compiler('c') }}
+-    - {{ stdlib('c') }}
+     - {{ compiler('rust') }}
+     - cargo-bundle-licenses
+     - python                                        # [build_platform != target_platform]
+-- 
+2.40.1
+

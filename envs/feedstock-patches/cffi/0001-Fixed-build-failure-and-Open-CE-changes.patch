@@ -1,12 +1,12 @@
-From c4209900e82cc2c13493ab7144463d1ac33e3b56 Mon Sep 17 00:00:00 2001
+From 320f0c6b62f1286fd3665b342dfeaa1e730aa763 Mon Sep 17 00:00:00 2001
 From: Archana-Shinde1 <archana.shinde1@ibm.com>
-Date: Thu, 19 Mar 2026 13:06:41 +0000
+Date: Thu, 26 Mar 2026 07:17:41 +0000
 Subject: [PATCH] Fixed build failure and Open-CE changes
 
 ---
- recipe/meta.yaml               |   5 +++--
- recipe/patches/pyproject.patch | Bin 0 -> 412 bytes
- 2 files changed, 3 insertions(+), 2 deletions(-)
+ recipe/meta.yaml               |  5 +++--
+ recipe/patches/pyproject.patch | 11 +++++++++++
+ 2 files changed, 14 insertions(+), 2 deletions(-)
  create mode 100644 recipe/patches/pyproject.patch
 
 diff --git a/recipe/meta.yaml b/recipe/meta.yaml
@@ -40,19 +40,21 @@ index 07693e4..dd00a2f 100644
    run:
 diff --git a/recipe/patches/pyproject.patch b/recipe/patches/pyproject.patch
 new file mode 100644
-index 0000000000000000000000000000000000000000..3643904216029b1359443965aa8eb59836703b30
-GIT binary patch
-literal 412
-zcma)$QEP)R6osFcUvbH+jf+}!3IoU1LScnc_O_=GqswLzi7A_u{`VzP81!lPA>p3$
-zox>%Bz&MZAd<yPjXVefIEBm{YrUjuHNlHj)ofdUo#k4G{>><r5MAQ$8qUa`j8!PK<
-z9j8@ZuB$vNud${9k`ybyE^pHyK+uYbTRA#uG&};{8Y^V4VSCbi(RSJi+c7SnGZqfB
-z`|u!V!yt7J&%jM9VvN8F)+*r}&Yc{>kB^(Dm;EMIEna!bw`fP)JT9ISKki;J`_-Cn
-zjW37{k_$a8-hTInQS>LA0~`v2aY4WbHchgV!cJa&M-T=dtm!RNDqQu-bbn&KfV#dO
-Mj934{LLl?(FR&DNmH+?%
-
-literal 0
-HcmV?d00001
-
+index 0000000..3643904
+--- /dev/null
++++ b/recipe/patches/pyproject.patch
+@@ -0,0 +1,11 @@
++--- pyproject.toml.orig	2026-03-17 10:26:59.076938250 +0000
+++++ pyproject.toml	2026-03-17 10:27:34.295749537 +0000
++@@ -16,7 +16,7 @@
++ 
++ description = "Foreign Function Interface for Python calling C code."
++ readme = {file = "README.md", content-type = "text/markdown"}
++-license = "MIT"
+++license = {text = "MIT"}
++ classifiers = [
++     "Programming Language :: Python",
++     "Programming Language :: Python :: 3",
 -- 
 2.40.1
 

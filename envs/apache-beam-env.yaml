@@ -94,11 +94,11 @@ packages:
     git_tag : 9e3ebf08dd8bd0e31230f4cb0542a87bbc274f0e    # v1.90.*
     patches:
       - feedstock-patches/rust/0001-Open-CE-changes.patch #[not s390x]
-#      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
+      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
   - feedstock : https://github.com/conda-forge/rust-activation-feedstock
     git_tag : 4b6fee0b1fc5a98302f1a6c9e430f0993783ac55
     patches :
-      - feedstock-patches/rust-activation/0001-Open-CE-changes.patch
+      - feedstock-patches/rust-activation/0001-Fixed-build.patch
   - feedstock : https://github.com/conda-forge/crcmod-feedstock.git
     git_tag : f51a98b1aa3b2591cebe3e0f42231b1f6c1d6fcc
   - feedstock : https://github.com/conda-forge/objsize-feedstock.git

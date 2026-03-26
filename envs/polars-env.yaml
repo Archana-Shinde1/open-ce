@@ -8,11 +8,11 @@ packages:
     git_tag : 9e3ebf08dd8bd0e31230f4cb0542a87bbc274f0e    # v1.90.*
     patches:
       - feedstock-patches/rust/0001-Open-CE-changes.patch #[not s390x]
-#      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
+      - feedstock-patches/rust/0001-Add-fix-to-support-s390x-platform.patch #[s390x]
   - feedstock : https://github.com/conda-forge/rust-activation-feedstock
     git_tag : 4b6fee0b1fc5a98302f1a6c9e430f0993783ac55
     patches :
-#      - feedstock-patches/rust-activation/0001-Fixed-build.patch
+      - feedstock-patches/rust-activation/0001-Fixed-build.patch
   - feedstock : https://github.com/conda-forge/maturin-feedstock
     git_tag : e9a48388edf8cb0cb083120db53ef9e967d85b03
     patches :
